@@ -2102,6 +2102,18 @@ def EvalNormalCdfInverse(p, mu=0, sigma=1):
     return stats.norm.ppf(p, loc=mu, scale=sigma)
 
 
+def EvalLognormalPdf(x, mu=0, sigma=1):
+    """Evaluates the PDF of the lognormal distribution.
+
+    x: float or sequence
+    mu: mean parameter
+    sigma: standard deviation parameter
+
+    Returns: float or sequence
+    """
+    return stats.lognorm.pdf(x, loc=mu, scale=sigma)
+
+
 def EvalLognormalCdf(x, mu=0, sigma=1):
     """Evaluates the CDF of the lognormal distribution.
 
@@ -2350,6 +2362,10 @@ class Dirichlet(object):
         alpha0 = self.params.sum()
         ps = self.params / alpha0
         return Pmf(zip(xs, ps), label=label)
+
+    def Mean(self):
+        """Array of means."""
+        return self.params / np.sum(self.params)
 
 
 def BinomialCoef(n, k):
